@@ -9,6 +9,7 @@ import scrapy
 
 
 class ArticleItem(scrapy.Item):
+    article_url = scrapy.Field()
     author = scrapy.Field()
     title = scrapy.Field()
     magnet = scrapy.Field()
