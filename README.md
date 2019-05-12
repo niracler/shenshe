@@ -22,7 +22,7 @@ cd shenshe/
 scrapy crawl Shenshe
 ```
 
-## centos7 关闭防火墙
+### centos7 关闭防火墙
 
 关闭
 ```bash
@@ -51,3 +51,4 @@ source venv/bin/activate
 - [分布式网络数据抓取系统设计与实现](https://www.jianshu.com/p/fb028ad74798)
 - [分布式爬虫的部署之Scrapyd分布式部署](https://juejin.im/post/5b0e1a8ff265da092100709f)
 - [scrapy-redis](https://github.com/rmax/scrapy-redis)
+- [小白进阶之Scrapy第三篇（基于Scrapy-Redis的分布式以及cookies池）](https://cuiqingcai.com/4048.html)

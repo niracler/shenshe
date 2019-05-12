@@ -7,7 +7,6 @@ from scrapy_redis.spiders import RedisCrawlSpider
 class ShensheSpider(RedisCrawlSpider):
     name = 'shenshe_redis'
     allowed_domains = ['www.liuli.in']
-    start_urls = ['https://www.liuli.in/wp']
     redis_key = 'shenshe:start_urls'
 
     def parse(self, response):
@@ -20,17 +19,11 @@ class ShensheSpider(RedisCrawlSpider):
                 item['img_url'] = article.css('.entry-content img::attr(src)').extract_first()
                 yield scrapy.Request(url=url, callback=self.parse_item, meta={'item': item})
 
-        next_url = response.xpath('//div[@id="wp_page_numbers"]/ul/li[last()]/a/@href').extract_first()
-
-        if next_url:
-            yield scrapy.Request(url=next_url, callback=self.parse)
-
     def parse_item(self, response):
         item = response.meta.get('item')
         item['title'] = response.css('#content article header > h1::text').extract_first()
         item['author'] = response.css('#content article header > div .by-author a::text').extract_first()
         item['datetime'] = response.css('#content article header > div > a > time::text').extract_first()
-        # item['content'] = response.css('#content article .entry-content::text').extract_first()
         item['magnet'] = 'magnet:?xt=urn:btih:' + response.xpath(
             '//div[@id="content"]//div[@class="entry-content"]//text()').re_first('[0-9|a-z|A-Z]{40}')
         item['comment_source'] = response.css('#comments-title span::text').extract_first()
