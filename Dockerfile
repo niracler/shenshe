@@ -4,7 +4,8 @@ USER root
 ENV PYTHONUNBUFFERED=0
 ENV PYTHONIOENCODING=utf-8
 
-RUN python3 -m pip install redis
+COPY . ./
+RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-COPY spider.py spider.py
-CMD python3 spider.py
+ENTRYPOINT ["scrapy"]
+CMD ["crawl", "shenshe_redis"]

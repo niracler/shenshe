@@ -21,6 +21,20 @@ services:
         traefik.docker.network: spider
         traefik.port: 6379
 
+  crawler:
+    image: inner.registry:5000/spider
+    networks:
+      - spider
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      endpoint_mode: dnsrr
+#      placement:
+#        constraints:
+#          - "node.labels.spider-role == crawler"
+
 volumes:
   data:
 

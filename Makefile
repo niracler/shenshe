@@ -14,3 +14,9 @@ spider-nginx:
 
 spider:
 	docker stack deploy -c docker-compose.yml spider
+
+build:
+	docker build -t "inner.registry:5000/spider" .
+
+push:
+	docker push "inner.registry:5000/spider"
